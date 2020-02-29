@@ -1,0 +1,47 @@
+ext {
+    junitVersion = '5.1.0'
+    restAssuredVersion = '3.3.0'
+    jacksonDatabindVersion = '2.9.8'
+    allureRestAssuredVersion = '2.7.0'
+//    slf4jVersion = '1.7.25'
+    logbackClassicVersion = '1.2.3'
+    logbackCoreVersion = '1.2.3'
+    assertJ = '3.11.1'
+}
+
+dependencies {
+    compile "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabindVersion"
+    compile "io.rest-assured:rest-assured:$restAssuredVersion"
+    compile "io.qameta.allure:allure-rest-assured:$allureRestAssuredVersion"
+//    compile "org.slf4j:slf4j-simple:$slf4jVersion"
+    compile "ch.qos.logback:logback-classic:$logbackClassicVersion"
+    compile "ch.qos.logback:logback-core:$logbackCoreVersion"
+    compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'
+    compile group: 'com.github.javafaker', name: 'javafaker', version: '0.17.1'
+    compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.4.9'
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testCompile "org.assertj:assertj-core:$assertJ"
+}
+
+test {
+    useJUnitPlatform()
+    systemProperties System.getProperties()
+
+    testLogging{
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
+    test.outputs.upToDateWhen { false }
+}
+
+allure {
+    version = '2.5.0'
+    aspectjweaver = true
+    configuration = 'compile'
+
+    useJUnit5 {
+        version = '2.7.0'
+    }
+}

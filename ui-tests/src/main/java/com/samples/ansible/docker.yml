@@ -1,0 +1,10 @@
+---
+- hosts: all
+  become: yes
+  vars:
+    docker_edition: 'ce'
+    docker_package: "docker-{{ docker_edition }}"
+    docker_package_state: present 
+  roles:
+    - ansible-role-docker
+    - ansible-role-pip

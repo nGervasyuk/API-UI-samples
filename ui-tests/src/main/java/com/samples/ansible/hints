@@ -1,0 +1,8 @@
+ansible all -m ping -i hosts
+
+ansible-playbook docker.yml -i hosts
+
+ansible-galaxy install --roles-path ./roles git+https://github.com/geerlingguy/ansible-role-pip.git
+
+ansible 2.5.5
+
